@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+
+<div class="row mt-2 mb-4">
+    <div class="col col-md-8">
+        <div class="filters-header d-flex nowrap justify-content-start align-items-center
+                    p-3 text-secondary navbar-light
+                    border border-1 rounded mb-2"
+             data-bs-toggle="collapse" data-bs-target="#filters"
+             role="button" aria-expanded="false" aria-controls="#filters">
+            <button class="me-3 border rounded bg-white">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <h5 class="mb-0">Filters & Sorting</h5>
+        </div>
+        <div class="collapse bg-light border rounded" id="filters">
+            <form method="get">
+                <div class="filters-form d-flex p-2 w-100 justify-content-between flex-wrap
+                            text-secondary border border-light rounded-bottom">
+                    {{ filter.form|crispy }}
+                    <input class="btn btn-outline-dark mt-3 align-self-end" type="submit"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

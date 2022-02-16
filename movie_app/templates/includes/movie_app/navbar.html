@@ -1,0 +1,75 @@
+{% load static %}
+
+{% load movies_app_tags %}
+
+<div class="row">
+    <div class="col">
+        <nav class="navbar navbar-expand-md navbar navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'movie_app:main' %}"
+                   title="Main page">
+                    <img class="bg-white border-dark rounded-2"
+                         src="{% static 'movie_app/img/brand-logo.png' %}"
+                         alt="All movies logo"
+                         width="80px">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        {% for item in menu_items %}
+                            {% if not forloop.last %}
+                                <li class="nav-item">
+                                    {% concat_all 'movie_app:' item.slug as item_url %}
+                                    <a class="nav-link text-white" href="{% url item_url %}" title="{{ item.title }}">
+                                        {{ item.title }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <ul class="navbar-nav mr-auto">
+                        {% if not request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link register btn btn-outline-light text-white"
+                                   href="{% url 'movie_app:register' %}"
+                                   title="Register">
+                                    Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link login btn btn-outline-warning text-white"
+                                   href="{% url 'movie_app:login' %}"
+                                   title="Login">
+                                    Login
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link login btn btn-outline-primary text-white" href="#"
+                                   title="{{ user.username }} profile">
+                                    {{ user.username }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link logout btn btn-outline-light text-white"
+                                   href="{% url 'movie_app:logout' %}"
+                                   title="Logout">
+                                    Logout
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

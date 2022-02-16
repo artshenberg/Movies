@@ -1,0 +1,18 @@
+{% extends 'movie_app/base.html' %}
+
+{% load static %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'movie_app/css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="mt-4 row">
+        <div class="col">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% include 'includes/movie_app/movie_list.html' %}
+    </div>
+{% endblock %}

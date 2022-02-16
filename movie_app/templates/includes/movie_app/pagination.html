@@ -1,0 +1,71 @@
+{% load movies_app_tags %}
+
+{% if page_obj.has_other_pages %}
+    <div class="row mt-3">
+        <div class="col">
+            <nav aria-label="Pagination">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% url_replace request 'page' 1 %}" title="First page">
+                                &laquo;
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?{% url_replace request 'page' page_obj.previous_page_number %}"
+                               title="Previous page">
+                                &lsaquo;
+                            </a>
+                        </li>
+                        {% if page_obj.number|add:"-2" > 1 %}
+                            <li class="page-item">
+                                <a class="page-link">
+                                    ...
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    {% for page in paginator.page_range %}
+                        {% if page_obj.number == page %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="?{% url_replace request 'page' page %}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% elif page >= page_obj.number|add:"-2" and page <= page_obj.number|add:"2" %}
+                            <li class="page-item">
+                                <a class="page-link" href="?{% url_replace request 'page' page %}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        {% if page_obj.number|add:"2" < page_obj.paginator.num_pages %}
+                            <li class="page-item">
+                                <a class="page-link">
+                                    ...
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?{% url_replace request 'page' page_obj.next_page_number %}"
+                               title="Next page">
+                                &rsaquo;
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?{% url_replace request 'page' page_obj.paginator.num_pages %}"
+                               title="Last page">
+                                &raquo;
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endif %}

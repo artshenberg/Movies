@@ -1,0 +1,36 @@
+{% load static %}
+{% load movies_app_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap CSS & JS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <!-- Additional CSS & JS -->
+    <link rel="stylesheet" href="{% static 'movie_app/css/custom.css' %}">
+
+    {% block additional_css %}{% endblock %}
+    <title>{{ title }}</title>
+</head>
+<body>
+{% show_top_menu %}
+<div class="container">
+    {% block content %}
+    {% endblock %}
+    {% include 'includes/movie_app/pagination.html' %}
+</div>
+{% include 'includes/movie_app/footer.html' %}
+
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+
+
+<!-- Additional JS -->
+
+</body>
+</html>

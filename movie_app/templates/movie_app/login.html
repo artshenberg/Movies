@@ -1,0 +1,48 @@
+{% extends 'movie_app/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="mt-4 row">
+        <div class="col">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-0 col-md-0 col-md-4 col-lg-4">
+        </div>
+        <div class="col-12 col-md-12 col-md-8 col-lg-8">
+            <form method="post">
+                <div class="row">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <p class="invalid-feedback">
+                            <strong>
+                                {{ form.non_field_errors }}
+                            </strong>
+                        </p>
+                        {% for field in form %}
+                            {#                            {% if field.name in 'title slug description' %}#}
+                            <div class="mb-3">
+                                {{ field|as_crispy_field }}
+                            </div>
+                            {#                            {% endif %}#}
+                        {% endfor %}
+                    </div>
+                </div>
+                {#                <div class="row">#}
+                {#                    {% for field in form %}#}
+                {#                        {% if field.name in 'cover year rating genre' %}#}
+                {#                            <div class="col-6 col-xs-12">#}
+                {#                                <div class="mb-3">#}
+                {#                                    {{ field|as_crispy_field }}#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        {% endif %}#}
+                {#                    {% endfor %}#}
+                {#                </div>#}
+                <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

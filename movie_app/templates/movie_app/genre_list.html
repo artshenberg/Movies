@@ -1,0 +1,32 @@
+{% extends 'movie_app/base.html' %}
+
+{% block content %}
+    <div class="mt-4 row">
+        <div class="col">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
+            <ul class="list-group list-group-flush">
+                {% for genre in genres.all %}
+                    {% if genre.movie__count %}
+                        <li class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <a href="{{ genre.get_absolute_url }}">
+                                    <h5 class="mb-1">
+                                        {{ genre.name }}
+                                    </h5>
+                                </a>
+                                <a class="btn btn-sm btn-outline-warning text-dark"
+                                   href="{{ genre.get_absolute_url }}">
+                                        {{ genre.movie__count }}
+                                </a>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

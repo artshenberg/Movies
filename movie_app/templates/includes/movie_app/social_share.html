@@ -1,0 +1,30 @@
+{% include 'includes/movie_app/svg_sprite_icons.html' %}
+
+<li class="m-3"><a class="social"
+                    href="http://vk.com/share.php?url=127.0.0.1/{{ movie.get_absolute_url }}"
+                    target="_blank" rel="nofollow">
+    <svg class="bi" width="32" height="32">
+        <use xlink:href="#icon-vk"/>
+    </svg>
+</a></li>
+<li class="m-3"><a class="social"
+                    href="https://twitter.com/share?url=127.0.0.1/{{ movie.get_absolute_url }}"
+                    target="_blank" rel="nofollow">
+    <svg class="bi" width="32" height="32">
+        <use xlink:href="#twitter"/>
+    </svg>
+</a></li>
+<li class="m-3"><a class="social"
+                    href="https://www.facebook.com/sharer/sharer.php?u=127.0.0.1/{{ movie.get_absolute_url }}"
+                    target="_blank" rel="nofollow">
+    <svg class="bi" width="32" height="32">
+        <use xlink:href="#facebook"/>
+    </svg>
+</a></li>
+<li class="m-3"><a class="social"
+                    href="https://www.instagram.com/?url=127.0.0.1/{{ movie.get_absolute_url }}"
+                    target="_blank" rel="noopener">
+    <svg class="bi" width="32" height="32">
+        <use xlink:href="#instagram"/>
+    </svg>
+</a></li>

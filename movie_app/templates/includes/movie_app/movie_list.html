@@ -1,0 +1,81 @@
+{% include 'includes/movie_app/filter.html' %}
+
+<div class="row" id="movie-list">
+    <div class="col col-md-8">
+        {% if movies %}
+            <ul class="list-group list-group-flush">
+                {% for movie in movies %}
+                    <li class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-start wrap">
+                                <a href="{{ movie.get_absolute_url }}"
+                                   title="View more about {{ movie.title }}">
+                                    <div>
+                                        {% if movie.cover %}
+                                            <img class="card-img"
+                                                 src="{{ movie.cover.url }}"
+                                                 alt="{{ movie.title }}'s cover">
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div>
+                                    <a href="{{ movie.get_absolute_url }}"
+                                       title="View more about {{ movie.title }}">
+                                        <h5 class="mb-1">
+                                            {{ movie.title }}
+                                        </h5>
+                                    </a>
+                                    <div class="btn-group-sm btn-group align-items-baseline" role="group">
+                                        {% for genre in movie.genre.all %}
+                                            <a class="btn btn-outline-light text-dark"
+                                               href="{{ genre.get_absolute_url }}"
+                                               title="Show all {{ genre|title }} movies">
+                                                <small class="mb-1">
+                                                    {{ genre }}
+                                                </small>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                {% if movie.rating and movie.rating < 40 %}
+                                    <a class="btn btn-sm btn-outline-danger"
+                                       href="{% url 'movie_app:rating' movie.rating %}"
+                                       title="Show all movies with rating {{ movie.rating }}">
+                                        {{ movie.rating }}
+                                    </a>
+                                {% elif 40 <= movie.rating and movie.rating < 60 %}
+                                    <a class="btn btn-sm btn-outline-warning"
+                                       href="{% url 'movie_app:rating' movie.rating %}"
+                                       title="Show all movies with rating {{ movie.rating }}">
+                                        {{ movie.rating }}
+                                    </a>
+                                {% elif 60 <= movie.rating and movie.rating < 85 %}
+                                    <a class="btn btn-sm btn-outline-info"
+                                       href="{% url 'movie_app:rating' movie.rating %}"
+                                       title="Show all movies with rating {{ movie.rating }}">
+                                        {{ movie.rating }}
+                                    </a>
+                                {% elif 85 <= movie.rating and movie.rating <= 100 %}
+                                    <a class="btn btn-sm btn-outline-success"
+                                       href="{% url 'movie_app:rating' movie.rating %}"
+                                       title="Show all movies with rating {{ movie.rating }}">
+                                        {{ movie.rating }}
+                                    </a>
+                                {% endif %}        &nbsp;
+                                <a class="btn btn-sm btn-outline-warning text-dark"
+                                   href="{% url 'movie_app:year' movie.year %}"
+                                   title="Show all movies from {{ movie.year }}">
+                                    {{ movie.year }}
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h5 class="mb-1">No movies are available.</h5>
+        {% endif %}
+    </div>
+</div>
